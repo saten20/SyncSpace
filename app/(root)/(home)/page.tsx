@@ -12,6 +12,7 @@ function Home() {
     minute: '2-digit',
     hour12: true,
   });
+
   const date = new Intl.DateTimeFormat('en-IN', {
     weekday: 'long',
     day: 'numeric',

@@ -12,7 +12,7 @@ function Navbar() {
       <Image src="/icons/LOGO.jpg" alt='Vicolab' width={32} height={32} className='max-sm:size-10'/>
     </Link>
       <p className='text-[26px] font-extrabold text-white max-sm:hidden'>
-        Vicolab
+        SyncSpace
       </p>
       <div className='flex-between gap-5'>
           <SignedIn>
