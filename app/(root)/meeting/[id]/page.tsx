@@ -11,11 +11,16 @@ function Meeting({ params }: { params: { id: string } }) {
   const { isLoaded } = useUser();
   const [isSetupCompleted, setIsSetupCompleted] = useState(false);
 
+  // it is user defind hook use to find the current call
   const { call, isCallLoading } = getCallById(params.id);
+
   if (!isLoaded || isCallLoading) return <Loader />;
   
   return (
     <main className='h-screen w-full'>
+
+      {/* call will tell us in which call currently we are */}
+
       <StreamCall call={call}>
         <StreamTheme>
           {

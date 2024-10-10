@@ -7,7 +7,9 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
   
-import { CallControls, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, SpeakerLayout, useCallStateHooks } from '@stream-io/video-react-sdk';
+import { CallControls, CallingState, CallParticipantsList, CallStatsButton,
+     PaginatedGridLayout, SpeakerLayout, useCallStateHooks } from '@stream-io/video-react-sdk';
+
 import React, { useState } from 'react'
 import { LayoutList, User } from 'lucide-react';
 import { Button } from './ui/button';
@@ -19,6 +21,7 @@ type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
 
 function MeetingRoom() {
     const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
+    
     const [showParticipants, setShowParticipants] = useState(false);
     const layoutVideoType = ['Grid','Speaker-Left','Speaker-Right'];
     const searchParams = useSearchParams();

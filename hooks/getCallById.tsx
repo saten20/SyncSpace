@@ -7,7 +7,8 @@ export const getCallById = (id: string | string[]) => {
     const [isCallLoading, setIsCallLoading] = useState(true);
 
     const client = useStreamVideoClient();
-
+    
+    // This function will tell the current call 
     useEffect(() => {
         if (!client) return;
 
@@ -29,6 +30,8 @@ export const getCallById = (id: string | string[]) => {
 
         loadCall(); 
     }, [client, id]); 
+
+    // Returning the call that we will use inside the meeting.tsx page to find the current call
 
     return { call, isCallLoading };
 };

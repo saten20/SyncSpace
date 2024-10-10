@@ -31,6 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    //wrape app inside the clerk so that first authentication has to be done before using the app
+    
     <html lang="en">
       <ClerkProvider
         appearance={{

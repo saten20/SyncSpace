@@ -1,12 +1,10 @@
 'use client'
 import { useUser } from '@clerk/nextjs';
-import {
-    StreamVideo,
-    StreamVideoClient,
-  } from '@stream-io/video-react-sdk';
+import {StreamVideo, StreamVideoClient, } from '@stream-io/video-react-sdk';
 import { ReactNode, useEffect, useState } from 'react';
 import tokenProvider from '@/actions/stream.actions';  
 import Loader from '@/components/Loader';
+
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY
 
 
@@ -17,6 +15,10 @@ const StreamVideoProvider = ({children} : {children : ReactNode}) => {
     useEffect(() => {
         if(!isLoaded || !user)return;
         if(!apiKey) throw new Error("Api Key Missing");
+
+        // If user is exsist and api key is also exsist then we will create the stream client
+        // To create the stream client we will use the function StreamVideoClient which take object as an argument
+
         const client = new StreamVideoClient({
             apiKey,
             user:{

@@ -1,5 +1,8 @@
 import { clerkMiddleware,createRouteMatcher } from "@clerk/nextjs/server";
 
+// Below routes are made protected with the help of the createRouteMatcher
+// all the routes pass in array are now protected
+
 const protectedRoute = createRouteMatcher([
   '/',
   '/upcoming',
@@ -10,6 +13,8 @@ const protectedRoute = createRouteMatcher([
 ])
 
 export default clerkMiddleware((auth,req)=>{
+  //if user wants to access the protected route then first they have to authenticate them self
+  
   if(protectedRoute(req))auth().protect();
 });
 

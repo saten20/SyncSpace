@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   }
 };
 
+//we wrape all the folder of the root inside the StreamVideoProvider so that they can use the functionalites of
+// the video audio calling
 function RootLayout({children}:{children:ReactNode}) {
   return (
     <main>

@@ -8,6 +8,7 @@ import Loader from './Loader'
 import { useToast } from '@/hooks/use-toast'
 
 function CallType({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) {
+  // fetching from userdefind hook useGetCalls()
   const { endedCalls, callRecordings, upcomingCalls, isLoading } = useGetCalls();
   const router = useRouter();
   const [recording, setRecording] = useState<CallRecording[]>([]);
@@ -17,25 +18,25 @@ function CallType({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) {
     switch (type) {
       case 'ended':
         return endedCalls;
-        case 'recordings':
+      case 'recordings':
         return recording;
-        case 'upcoming':
+      case 'upcoming':
         return upcomingCalls;
-        default:
+      default:
           return [];
         }
-      };
+    };
       
       const getNoCallMessage = () => {
-        switch (type) {
-      case 'ended':
-        return 'No Previous Calls';
+      switch (type) {
+        case 'ended':
+          return 'No Previous Calls';
         case 'recordings':
           return 'No Recordings';
-          case 'upcoming':
+        case 'upcoming':
             return 'No Upcoming Calls';
-      default:
-        return '';
+        default:
+          return '';
       }
     };
    
@@ -43,6 +44,7 @@ function CallType({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) {
     const fetchRecordings = async()=>{
       try {
           const callData = await Promise.all(callRecordings.map((meeting)=>meeting.queryRecordings()));
+
           const recordings = callData.filter(call=>call.recordings.length > 0).flatMap(call=>call.recordings);
           setRecording(recordings);
         
@@ -67,8 +69,8 @@ function CallType({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) {
               key={(meeting as Call).id}
               icon={
                 type === 'ended'
-                  ? '/icons/previous.svg'
-                  : type === 'upcoming'
+                  ?'/icons/previous.svg'
+                  :type === 'upcoming'
                     ? '/icons/upcoming.svg'
                     : '/icons/recordings.svg'
               }

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 
+// This hooks are used to set upcomming meeting, previous meetings ,recordings of meetings 
+
 export const useGetCalls = () => {
   const { user } = useUser();
   const client = useStreamVideoClient();
@@ -13,7 +15,7 @@ export const useGetCalls = () => {
       if (!client || !user?.id) return;
       
       setIsLoading(true);
-
+  
       try {
         const { calls } = await client.queryCalls({
           sort: [{ field: 'starts_at', direction: -1 }],
@@ -35,6 +37,7 @@ export const useGetCalls = () => {
     };
 
     loadCalls();
+   
   }, [client, user?.id]);
 
   const now = new Date();
@@ -46,9 +49,12 @@ export const useGetCalls = () => {
   const upcomingCalls = calls?.filter(({ state: { startsAt } }: Call) => {
     return startsAt && new Date(startsAt) > now
   })
+
+
   const nextUpcomingMeetingTime = upcomingCalls?.[0]?.state?.startsAt
   ? new Date(upcomingCalls[0].state.startsAt).toLocaleString()
   : null;
 
   return { endedCalls, upcomingCalls, callRecordings: calls, isLoading,nextUpcomingMeetingTime }
+  
 };

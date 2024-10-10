@@ -17,6 +17,7 @@ interface MeetingModalProps{
     image?:string,
     buttonIcon?:string
 }
+// We are prepairing the meeting model with the help of the shadcn.
 
 function MeetingModal({isOpen,onClose,title,className,children,handleClick,buttonText,image,buttonIcon}:MeetingModalProps) {
   return (

@@ -13,7 +13,10 @@ import { Input } from "@/components/ui/input"
 
 
 function MeetingTypeList() {
+    //The useRouter() will route as user on recodings page
     const router = useRouter();
+    // In typescript we can define the exact type of the state.
+    // <'isSchedulingMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined>
     const [meetingState, setMeetingState] = useState<'isSchedulingMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined>()
 
     const user = useUser();
@@ -36,11 +39,16 @@ function MeetingTypeList() {
                 })
                 return;
             }
+            // it will generate the random id that we will use for calls (it is js method)
             const id = crypto.randomUUID();
+            // call is the method of the stremVideoClient()
             const call = client.call('default',id);
-            if(!call)throw new Error("Call Failed");
+            if(!call)
+                throw new Error("Call Failed");
+
             const startAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
             const description = values.description || "Instant Meeting";
+
             await call.getOrCreate({
                 data:{
                     starts_at:startAt,
@@ -49,6 +57,9 @@ function MeetingTypeList() {
                     }
                 }
             })
+            
+            // create the call and push us on the meeting page
+
             setCallDetails(call);
             if(!values.description){
                 router.push(`/meeting/${call.id}`);
@@ -56,6 +67,7 @@ function MeetingTypeList() {
             toast({
                 title: "Meeting Created",
            })
+
         } catch (error) {
             console.log(error)
             toast({
